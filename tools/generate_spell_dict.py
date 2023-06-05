@@ -160,7 +160,7 @@ class SpellDictGenerator:
 
     def merge_sort_dict_to_output(self) -> List[str]:
         """Merge and sort Sphinx and Pylint dicts"""
-        word_set = set(w.lower() for w in self._sphinx_words)
+        word_set = {w.lower() for w in self._sphinx_words}
         word_set.update(w.lower() for w in self._pylint_words)
         words = sorted(word_set)
         with open(self._output_file, "w", encoding="utf8") as out_file:

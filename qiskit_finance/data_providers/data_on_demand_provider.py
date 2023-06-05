@@ -102,9 +102,7 @@ class DataOnDemandProvider(BaseDataProvider):
                     stocks_error.append(ticker)
                     continue
                 quotes = json.loads(response.data.decode("utf-8"))["quotes"]
-                price_evolution = []
-                for q in quotes:
-                    price_evolution.append(q["ask_price"])
+                price_evolution = [q["ask_price"] for q in quotes]
                 self._data.append(price_evolution)
         finally:
             http.clear()

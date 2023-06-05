@@ -70,8 +70,7 @@ class PortfolioDiversification(OptimizationApplication):
         for i in range(self._num_assets):
             for j in range(self._num_assets):
                 mdl.add_constraint(x[(i, j)] <= y[j])
-        op = from_docplex_mp(mdl)
-        return op
+        return from_docplex_mp(mdl)
 
     def interpret(self, result: Union[OptimizationResult, np.ndarray]) -> List[int]:
         """Interpret a result as a list of asset indices

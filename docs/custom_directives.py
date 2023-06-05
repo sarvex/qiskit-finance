@@ -42,8 +42,6 @@ class CustomCalloutItemDirective(Directive):
         except ValueError as e:
             print(e)
             raise
-            return []
-
         callout_rst = CALLOUT_TEMPLATE.format(
             description=description, header=header, button_link=button_link, button_text=button_text
         )

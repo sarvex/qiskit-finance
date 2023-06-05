@@ -41,10 +41,7 @@ class CopyrightChecker:
 
     @staticmethod
     def _get_year_from_date(date) -> int:
-        if not date or len(date) < 4:
-            return None
-
-        return int(date[:4])
+        return None if not date or len(date) < 4 else int(date[:4])
 
     def _cmd_execute(self, args: List[str]) -> Tuple[str, Union[None, str]]:
         # execute command
@@ -126,7 +123,7 @@ class CopyrightChecker:
                     for year in word.strip().split(","):
                         if year.startswith("20") and len(year) >= 4:
                             try:
-                                curr_years.append(int(year[0:4]))
+                                curr_years.append(int(year[:4]))
                             except ValueError:
                                 pass
 

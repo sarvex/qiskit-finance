@@ -87,7 +87,7 @@ class ExchangeDataProvider(BaseDataProvider):
         stocks_forbidden = []
         for _, ticker_name in enumerate(self._tickers):
             stock_data = None
-            name = self._stockmarket + "/" + ticker_name
+            name = f"{self._stockmarket}/{ticker_name}"
             try:
                 stock_data = nasdaqdatalink.get(name, start_date=self._start, end_date=self._end)
             except nasdaqdatalink.AuthenticationError as ex:
