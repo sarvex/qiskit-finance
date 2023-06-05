@@ -274,7 +274,7 @@ def _check_bounds_valid(bounds):
     bounds = [bounds] if not isinstance(bounds[0], tuple) else bounds
 
     for i, bound in enumerate(bounds):
-        if not bound[1] - bound[0] > 0:
+        if bound[1] - bound[0] <= 0:
             raise ValueError(
                 f"Dimension {i} of the bounds are invalid, must be a non-empty "
                 "interval where the lower bounds is smaller than the upper bound."

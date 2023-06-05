@@ -42,14 +42,13 @@ class TestReadmeSample(QiskitFinanceTestCase):
         # assumes one code sample to test per readme
         readme_sample = None
         with open(readme_path, encoding="UTF-8") as readme_file:
-            match_sample = re.search(
+            if match_sample := re.search(
                 "```python.*```",
                 readme_file.read(),
                 flags=re.S,
-            )
-            if match_sample:
+            ):
                 # gets the matched string stripping the markdown code block
-                readme_sample = match_sample.group(0)[9:-3]
+                readme_sample = match_sample[0][9:-3]
 
         if readme_sample is None:
             self.skipTest(f"No sample found inside {readme_name}.")

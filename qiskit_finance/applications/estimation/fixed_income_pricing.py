@@ -89,12 +89,11 @@ class FixedIncomePricing(EstimationApplication):
             The :class:`qiskit.algorithms.EstimationProblem` created
             from the Fixed problem instance.
         """
-        problem = EstimationProblem(
+        return EstimationProblem(
             state_preparation=self._state_preparation,
             objective_qubits=[self._objective_qubits],
             post_processing=self._objective.post_processing,
         )
-        return problem
 
     def interpret(self, result: AmplitudeEstimatorResult) -> float:
         """Convert the calculation result of the problem

@@ -78,8 +78,7 @@ class PortfolioOptimization(OptimizationApplication):
         linear = np.dot(self._expected_returns, x)
         mdl.minimize(self._risk_factor * quad - linear)
         mdl.add_constraint(mdl.sum(x[i] for i in range(num_assets)) == self._budget)
-        op = from_docplex_mp(mdl)
-        return op
+        return from_docplex_mp(mdl)
 
     def portfolio_expected_value(self, result: Union[OptimizationResult, np.ndarray]) -> float:
         """Returns the portfolio expected value based on the result.
@@ -119,8 +118,8 @@ class PortfolioOptimization(OptimizationApplication):
 
     def _check_compatibility(self, bounds) -> None:
         """Check the compatibility of given variables"""
-        if len(self._expected_returns) != len(self._covariances) or not all(
-            len(self._expected_returns) == len(row) for row in self._covariances
+        if len(self._expected_returns) != len(self._covariances) or any(
+            len(self._expected_returns) != len(row) for row in self._covariances
         ):
             raise QiskitFinanceError(
                 "The sizes of expected_returns and covariances do not match. ",

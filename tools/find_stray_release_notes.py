@@ -29,8 +29,7 @@ def discover_files():
     """Find all .py, .pyx, .pxd files in a list of trees"""
     cmd = ["git", "ls-tree", "-r", "--name-only", "HEAD"]
     res = subprocess.run(cmd, capture_output=True, check=True, encoding="UTF8")
-    files = res.stdout.split("\n")
-    return files
+    return res.stdout.split("\n")
 
 
 def validate_path(file_path):
@@ -46,8 +45,7 @@ def _main():
     files = discover_files()
     with multiprocessing.Pool() as pool:
         res = pool.map(validate_path, files)
-    failed_files = [x for x in res if x is not None]
-    if len(failed_files) > 0:
+    if failed_files := [x for x in res if x is not None]:
         for failed_file in failed_files:
             sys.stderr.write(f"{failed_file} is not in the correct location.\n")
         sys.exit(1)

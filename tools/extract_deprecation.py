@@ -54,9 +54,9 @@ class DeprecationExtractor:
         Returns:
             bool: if messages were saved
         """
-        if self._output_filename:
             # create file even if it is empty
-            if self._messages or force_create:
+        if self._messages or force_create:
+            if self._output_filename:
                 with open(self._output_filename, "w", encoding="utf8") as file:
                     if self._messages:
                         file.write("\n".join(self._messages))
